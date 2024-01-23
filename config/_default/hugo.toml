@@ -1,0 +1,79 @@
+baseURL = "./"
+title = "gohugo-tailwindcss-alpinjs-starter"
+languageCode = "en-us"
+disableAliases = true
+disableHugoGeneratorInject = true
+enableRobotsTXT = true
+DefaultContentLanguage = "en"
+paginate = 7
+rssLimit = 10
+
+enableEmoji = false
+
+# Theme
+theme = "basic"
+# GoogleAnalytic
+#googleAnalytics = ""
+
+canonifyURLs = true
+
+# add output format for section sitemap.xml
+[outputFormats.SITEMAP]
+mediaType = "application/xml"
+baseName = "sitemap"
+isHTML = false
+isPlainText = true
+noUgly = true
+rel  = "sitemap"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      linkify = false
+      table = true
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[taxonomies]
+  contributor = "contributors"
+
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "hugo_stats.json"
+    target = "assets/watching/hugo_stats.json"
+  [[module.mounts]]
+    source = "node_modules/@alpine-collective/toolkit-scroll/dist/module.esm.js"
+    target = "static/js/toolkit-scroll.js"
+  [[module.mounts]]
+    source = "node_modules/alpinejs/dist/module.esm.js"
+    target = "static/js/alpinejs.js"
+
+[build]
+  writeStats = true
+  [[build.cachebusters]]
+    source = "assets/watching/hugo_stats\\.json"
+    target = "styles\\.css"
+  [[build.cachebusters]]
+    source = "(postcss|tailwind)\\.config\\.js"
+    target = "css"
+  [[build.cachebusters]]
+    source = "assets/.*\\.(js|ts|jsx|tsx)"
+    target = "js"
+  [[build.cachebusters]]
+    source = "assets/.*\\.(.*)$"
+    target = "$1"

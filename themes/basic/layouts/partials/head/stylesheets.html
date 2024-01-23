@@ -1,0 +1,19 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<!-- Styles -->
+{{ $postCssOptions := dict "config" "./postcss.config.js" }} 
+{{ $css := resources.Get "css/styles.css" }} 
+{{ $css = $css | resources.PostCSS $postCssOptions }} 
+
+{{ if or (eq hugo.Environment "staging") (eq hugo.Environment "production") }} 
+  {{ $css = $css | minify | fingerprint | resources.PostProcess }}
+{{ end }}
+<link
+  rel="stylesheet"
+  href="{{ $css.RelPermalink }}"
+  integrity="{{ $css.Data.Integrity }}"
+  media="screen"
+/>
+
+
+
+
